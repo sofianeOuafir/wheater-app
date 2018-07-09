@@ -18,14 +18,16 @@ const argv = yargs
 
 var address = argv.address;
 
-geocode.geocodeAddress(address);
-  // .then(function fullfilled(results){
-  //   return weather.getWeather(results.lat, results.lng);
-  // })
-  // .then(function fullfilled(weatherResults){
-  //   console.log(`Temperature: ${weatherResults.temperature} degres`);
-  //   console.log(`Feels like: ${weatherResults.apparentTemperature} degres`);
-  // })
-  // .catch(function rejected(errorMessage){
-  //   console.log(errorMessage);
-  // });
+geocode.geocodeAddress(address)
+  .then(function fullfilled(results){
+    console.log(`Location: ${results.formatted_address}`);
+    return weather.getWeather(results.lat, results.lng);
+  })
+  .then(function fullfilled(results){
+    console.log(`Temperature: ${results.temperature}`);
+    console.log(`Feels Like: ${results.apparentTemperature}`);
+  })
+  .catch(function rejected(errorMessage){
+    console.log(errorMessage);
+  });
+
