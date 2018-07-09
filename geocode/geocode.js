@@ -10,6 +10,10 @@ var geocodeAddress = (address) => {
         if(response.data.status === 'ZERO_RESULTS'){
           throw new Error('Unable to find address.')
         }
+        var lat = response.data.results[0].geometry.lat;
+        var lng = response.data.results[0].geometry.lng;
+        var formatted_address = response.data.results[0].formatted_address;
+         
         console.log(response.data);
       })
       .catch(function rejected(error){
